@@ -6,7 +6,7 @@
 3. call upload script
 */
 
-const s3File = require('../lib/aws-s3-file')
+const s3FileUpload = require('../lib/aws-s3-file-upload')
 
 const astroFile = {
   path: process.argv[2],
@@ -14,6 +14,6 @@ const astroFile = {
 }
 
 // invoke s3Upload() promise, handling success and error with .then and .catch
-s3File(astroFile)
+s3FileUpload(astroFile)
   .then((data) => console.log(data))
   .catch((error) => console.error(error))
