@@ -1,7 +1,7 @@
 'use strict'
 
 // creating a base name for the mongodb
-const mongooseBaseName = 'AstroDoc-S3-upload-express'
+const mongooseBaseName = 'astroDoc-S3-file-express'
 
 // create the mongodb uri for development and test
 const database = {

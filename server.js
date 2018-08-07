@@ -9,7 +9,7 @@ const fileRoutes = require('./app/routes/file_routes')
 const userRoutes = require('./app/routes/user_routes')
 
 // require database configuration logic
-// `db` will be the actual Mongo URI as a string
+// `db` will be the actual Mongo URL as a string
 const db = require('./config/db')
 
 // load secret keys for signing tokens from .env
