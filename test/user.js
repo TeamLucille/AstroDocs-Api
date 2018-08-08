@@ -13,6 +13,7 @@ chai.use(chaiHttp)
 const user = {
   credentials: {
     email: 'foo@bar.baz',
+    username: 'RubyJesus',
     password: '12345',
     password_confirmation: '12345'
   }

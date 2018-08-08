@@ -1,5 +1,5 @@
 {
-  "name": "express-api-template",
+  "name": "astrodocs-api",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -14,9 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.287.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "crypto": "^1.0.1",
     "dotenv": "^4.0.0",
     "express": "^4.16.1",
     "jsonwebtoken": "^8.1.1",
