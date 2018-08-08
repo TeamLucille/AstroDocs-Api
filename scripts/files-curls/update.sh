@@ -11,7 +11,7 @@ curl "${API}${URL_PATH}/${ID}" \
 --data '{
     "file": {
       "text": "'"${TEXT}"'",
-      "tag":"'"${TAG}"'",
+      "tags":"'"${TAGS}"'",
       "type":"'"${TYPE}"'"
     }
   }'

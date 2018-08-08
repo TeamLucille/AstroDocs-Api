@@ -10,7 +10,7 @@ curl "${API}${URL_PATH}/${ID}" \
 --data '{
     "file": {
       "title": "'"${TITLE}"'",
-      "tag":"'"${TAG}"'",
+      "tags":"'"${TAGS}"'",
       "type":"'"${TYPE}"'"
     }
   }'
