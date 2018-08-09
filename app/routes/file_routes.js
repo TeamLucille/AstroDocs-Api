@@ -30,48 +30,74 @@ const router = express.Router()
 var multer  = require('multer')
 // var multerS3 = require('multer-s3')
 
+var upload = multer({ dest: 'uploads/'})
 var aws = require('aws-sdk')
-var s3 = require('s3')
-var mime = require('mime')
+// var s3 = require('s3')
+// var mime = require('mime')
 
-// var s3 = new aws.S3('astrodocs-bucket',{
+// var s3 = new aws.S3({
 //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
 //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 // })
 
-var fs = require('fs')
-
 const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME
 const IAM_USER_KEY = process.env.AWS_ACCESS_KEY_ID
 const IAM_USER_SECRET = process.env.AWS_SECRET_ACCESS_KEY
+const path = require('path')
+const s3 = new aws.S3()
 
-function uploadToS3(file) {
+const s3Upload = file => {
+  const fs = require('fs');
+  const stream = fs.createReadStream(file);
+  var mime = require('mime')
+
+
+  const params = {
+    ACL: "public-read",
+    Bucket: process.env.AWS_S3_BUCKET_NAME,
+    Key: `${new Date().toISOString().split("T")[0]}-${path.basename(
+      stream.path
+    )}`,
+    Body: stream,
+    // contentType: fileType.mime
+  };
+
+  return new Promise((resolve, reject) => {
+    s3.upload(params, (err, data) => {
+      err ? reject(err) : resolve(data);
+    });
+  });
+};
+
+
+
+// function uploadToS3(file) {
 // const fs = require("fs");
 // const stream = fs.readFileSync(file);
 
-  let s3bucket = new aws.S3({
-    accessKeyId: IAM_USER_KEY,
-    secretAccessKey: IAM_USER_SECRET,
-    Bucket: BUCKET_NAME
-  });
-  s3bucket.createBucket(function () {
-      var params = {
-        ACL: "public-read",
-        Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key:  "placeholder", // file.title,
-        Body: "placehoding", // file.body,
-        // Type: mime.getType(stream)
-      };
-      s3bucket.upload(params, function (err, data) {
-        if (err) {
-          console.log('error in callback');
-          console.log(err);
-        }
-        console.log('success');
-        console.log(data);
-      });
-  });
-}
+//   let s3bucket = new aws.S3({
+//     accessKeyId: IAM_USER_KEY,
+//     secretAccessKey: IAM_USER_SECRET,
+//     Bucket: BUCKET_NAME
+//   });
+//   s3bucket.createBucket(function () {
+//       var params = {
+//         ACL: "public-read",
+//         Bucket: process.env.AWS_S3_BUCKET_NAME,
+//         Key:  file.title,
+//         Body: file.body,
+//         Type: mime.getType(stream)
+//       };
+//       s3bucket.upload(params, function (err, data) {
+//         if (err) {
+//           console.log('error in callback');
+//           console.log(err);
+//         }
+//         console.log('success');
+//         console.log(data);
+//       });
+//   });
+// }
 //Uploads
 // var upload = multer({
 //   storage: multerS3({
@@ -116,15 +142,14 @@ router.get('/files/:id', requireToken, (req, res) => {
 
 // CREATE
 // POST /files
-router.post('/files', /*requireToken,*/ (req, res) => {
+router.post('/files', upload.single('file'),/*requireToken,*/ (req, res) => {
   // set owner of new file to be current user
   // req.body.file.owner = req.user.id
-  var file = req.file
+  var file = req.body.file.image
 
-  uploadToS3(file)
-  // var stream = fs.createReadStream(file.path)
-
-  File.create(req.body.file)
+  s3Upload(file).then((data)=>{
+    req.body.file.image=data.Location
+    File.create(req.body.file)
     // respond to succesful `create` with status 201 and JSON of new "file"
     .then(file => {
       res.status(201).json({ file: file })
@@ -133,6 +158,8 @@ router.post('/files', /*requireToken,*/ (req, res) => {
     // the error handler needs the error message and the `res` object so that it
     // can send an error message back to the client
     .catch(err => handle(err, res))
+  }).catch(console.error)
+  // var stream = fs.createReadStream(file.path)
 })
 
 // UPDATE

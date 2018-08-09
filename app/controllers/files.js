@@ -5,7 +5,7 @@ const models = require('app/models/file');
 const File = models.file;
 
 const multer  = require('multer');
-const multerUpload = multer({ dest: '/files/' });
+const multerUpload = multer({ dest: '/uploads/' });
 
 const s3Upload = require('lib/aws-s3-file-upload');
 
