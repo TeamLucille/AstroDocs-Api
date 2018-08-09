@@ -31,16 +31,47 @@ var multer  = require('multer')
 // var multerS3 = require('multer-s3')
 
 var aws = require('aws-sdk')
-var S3FS = require('s3fs')
+var s3 = require('s3')
+var mime = require('mime')
 
-var s3 = new S3FS('astrodocs-bucket',{
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-})
+// var s3 = new aws.S3('astrodocs-bucket',{
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+// })
 
 var fs = require('fs')
 
+const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME
+const IAM_USER_KEY = process.env.AWS_ACCESS_KEY_ID
+const IAM_USER_SECRET = process.env.AWS_SECRET_ACCESS_KEY
 
+function uploadToS3(file) {
+// const fs = require("fs");
+// const stream = fs.readFileSync(file);
+
+  let s3bucket = new aws.S3({
+    accessKeyId: IAM_USER_KEY,
+    secretAccessKey: IAM_USER_SECRET,
+    Bucket: BUCKET_NAME
+  });
+  s3bucket.createBucket(function () {
+      var params = {
+        ACL: "public-read",
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key:  "placeholder", // file.title,
+        Body: "placehoding", // file.body,
+        // Type: mime.getType(stream)
+      };
+      s3bucket.upload(params, function (err, data) {
+        if (err) {
+          console.log('error in callback');
+          console.log(err);
+        }
+        console.log('success');
+        console.log(data);
+      });
+  });
+}
 //Uploads
 // var upload = multer({
 //   storage: multerS3({
@@ -88,21 +119,15 @@ router.get('/files/:id', requireToken, (req, res) => {
 router.post('/files', /*requireToken,*/ (req, res) => {
   // set owner of new file to be current user
   // req.body.file.owner = req.user.id
-  // var file = req.file
-  req.File
+  var file = req.file
+
+  uploadToS3(file)
   // var stream = fs.createReadStream(file.path)
-  return s3.writeFile(File).then(function(){
-    fs.unlink(File.path, function() {
-      if (err) {
-        console.error(err)
-      }
-    })
-  })
 
   File.create(req.body.file)
     // respond to succesful `create` with status 201 and JSON of new "file"
     .then(file => {
-      res.status(201).json({ file: File })
+      res.status(201).json({ file: file })
     })
     // if an error occurs, pass it off to our error handler
     // the error handler needs the error message and the `res` object so that it

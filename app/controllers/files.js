@@ -5,7 +5,7 @@ const models = require('app/models/file');
 const File = models.file;
 
 const multer  = require('multer');
-const multerUpload = multer({ dest: 'files/' });
+const multerUpload = multer({ dest: '/files/' });
 
 const s3Upload = require('lib/aws-s3-file-upload');
 
@@ -27,15 +27,15 @@ const create = (req, res, next) => {
   // let File = Object.assign(req.body.file, {
   //   _owner: req.currentUser._id,
   // });
-  // File.create(file)
-  //   .then(file => res.json({ file }))
-  //   .catch(err => next(err));
+  File.create(file)
+     .then(file => res.json({ file }))
+     .catch(err => next(err));
 
-  s3Upload(req.file)
+  s3Upload(req.file, buffer, callback)
     .then((s3response) =>
       File.create({
         url: s3response.Location,
-        title: req.body.image.title,
+        title: req.body.file.title,
       }))
     .then((file) => res.json({ file }))
     .catch((err) => next(err));
@@ -79,7 +79,7 @@ module.exports = controller({
   update,
   destroy,
 }, { before: [
-  { method: multerUpload.single('image[file]'), only: ['create'] },
+  { method: multerUpload.single('file[file]'), only: ['create'] },
 
   // { method: authenticate, only: ['update', 'destroy'] },
 ], });
