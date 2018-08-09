@@ -6,13 +6,6 @@ URL_PATH="/files"
 curl "${API}${URL_PATH}/${ID}" \
   --include \
   --request GET \
-  --header "Authorization: Bearer ${TOKEN}"
---data '{
-    "file": {
-      "title": "'"${TITLE}"'",
-      "tags":"'"${TAGS}"'",
-      "type":"'"${TYPE}"'"
-    }
-  }'
+  --header "Authorization: Bearer ${TOKEN}" 
 
 echo

@@ -10,8 +10,9 @@ curl "${API}${URL_PATH}/${ID}" \
 --header "Authorization: Bearer ${TOKEN}" \
 --data '{
     "file": {
-      "text": "'"${TEXT}"'",
+      "title": "'"${TITLE}"'",
       "tags":"'"${TAGS}"'",
+      "text": "'"${TEXT}"'",
       "type":"'"${TYPE}"'"
     }
   }'
