@@ -1,206 +1,72 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+1) This is the read-me to the the back-end for our project, AstroDocs.  To see information about the front-end for AsroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
 
-# express-api-template
 
-A template for starting projects with `express` as an API. Includes
-authentication and common middlewares.
+This is the Link for our ERD: https://docs.google.com/document/d/1_BZWpVWBRwXZ81VKUb7lE4CrhsIMhu-OPn-EwUkJvVE/edit?usp=sharing.
 
-## Installation
+2) Technologies used: 
+    *Node
+    *Express
+    *MongoDB
+    *Mongoose
 
-1.  [Download](../../archive/master.zip) this template.
-1.  Move the .zip file to your `wdi/projects/` directory and Unzip it (creating a folder) -- **NOTE:** if the folder was already unzipped, use the `mv` command line to move it to the `wdi/projects/` directory.
-1.  Rename the directory from express-api-template -> your-app-name.
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Move into the new project and `git init`.
-1.  Replace all instances of `'express-api-template'` with your app name.
-1.  Install dependencies with `npm install`.
-1.  Ensure that you have `nodemon` installed by running `npm install -g nodemon`.
-1.  From the root of your repository, run the following commands. They will set a SECRET_KEY for development and testing.
- ```sh
- echo SECRET_KEY_BASE_TEST=$(openssl rand -base64 66 | tr -d '\n') >> .env
- echo SECRET_KEY_BASE_DEVELOPMENT=$(openssl rand -base64 66 | tr -d '\n') >> .env
- ```
-1.  Ensure the API is functioning properly by running `npm run server`.
-1.  Once everything is working, make an initial commit.
-1.  Follow the steps in [express-api-deployment-guide](https://git.generalassemb.ly/ga-wdi-boston/express-api-deployment-guide)
+3) User Stories:
 
-## Structure
+ OWNERS:
 
-Dependencies are stored in [`package.json`](package.json).
+- As a visitor to AstroDocs I need to know how to sign up so that I can become an Owner and sign in(using email, password, and password confirmation)
 
-The most important file for understanding the structure of the template is
-`server.js`. This is where the actual Express `app` object is created, where
-the middlewares and routes are registered, and more. To register a routefile,
-follow the pattern established here with `exampleRoutes` and `userRoutes`. If
-you want to add any middlewares to your app, do that here.
+- As an owner I need to be able to log in with email and password so that only I will have the ability to create, update, and delete files.  
 
-The `app` directory contains models and route files. Models are simply Mongoose
-models. To create your own, follow the patterns established in
-`app/models/example.js`. Route files are somewhat similar to controllers in
-Rails, but they cover more functionality, including serialization and deciding
-which HTTP verbs to accept and what to do with them.
+- As an owner I need to be able to change my my password so that I can pick a new one if I would like.  
 
-The `config` directory holds just `db.js`, which is where you specify the name
-and URL of your database.
+- As an owner I need to be able to get feedback from the website after after each action's success or failure.
 
-The `lib` directory is for code that will be used in other places in the
-application. The token authentication code is stored in `lib/auth.js`. The
-other files in `lib` deal with error handling. `custom_errors.js` is where all
-the different custom classes of errors are created. If you need some other kind
-of error message, you can add it here. There are also some functions defined
-here that are used elsewhere to check for errors. `lib/error_handler.js` is a
-function that will be used in all your `.catch`es. It catches errors, and sets
-the response status code based on what type of error got thrown.
+- As an owner I need all forms to clear after submitting (either success or failure) so that I can resubmit forms as needed.  
 
-You probably will only need to interact with files in `app/models`,
-`app/routes`, and `server.js`. You'll need to edit `db/config.js` just once,
-to change the name of your app.
+- As a signed-in Owner I need to know what my options are so that I can work with my files.
+    *Create files.
+    *Update files.
+    *Must be able to view my files single & many.
 
-## Tasks
+- As an Owner I need to know where my files are stored so that I can CRUD them.
 
-Instead of `grunt`, this template uses `npm` as a task runner. This is more
-conventional for modern Express apps, and it's handy because we'll definitely
-use `npm` anyway. These are the commands available:
+- As an Owner I need to know how to add tags to my files so that I can find them later.
 
-| Command                | Effect                                                                                                      |
-|------------------------|-------------------------------------------------------------------------------------------------------------|
-| `npm run server`       | Starts a development server with `nodemon` that automatically refreshes when you change something.                                                                                         |
-| `npm test`             | Runs automated tests.                                                                                       |
-| `npm run debug-server` | Starts the server in debug mode, which will print lots of extra info about what's happening inside the app. |
+- 
+VISITORS:
 
-## API
+- As a non-authorized visitor to AstroDocs I need to be able to browse recent/ all uploaded files so that I can view them.
 
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
+-  As a non-authorized visitor I need to be able to download files that are available so that I can download them to work on them/view them locally. 
 
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API.
 
-### Authentication
+GENERAL:
+The app should keep track of:
+    1)date created/uploaded
+    2)date modified
+    3)owner (user who uploaded the file)
+    4)tags
 
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/` | `users#changepw`  |
-| DELETE | `/sign-out/`        | `users#signout`   |
+4) CHALLENGES:
+Initially our group decided to set up our data base 
 
-#### POST /sign-up
 
-Request:
+5) FUTURE DEVELOPMENTS:
 
-```sh
-curl --include --request POST http://localhost:4741/sign-up \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password",
-      "password_confirmation": "an example password"
-    }
-  }'
-```
+    *Currently owners can set up tags, but in the future we want set up the ability for visitors to search by tags.
 
-```sh
-scripts/sign-up.sh
-```
 
-Response:
+    *Link to Future Developments ERD:
+    https://docs.google.com/document/d/1kB9eT2_IIBuNgMBuWt2Amfwz0ECSLyfELlENOnzs9l0/edit?usp=sharing
 
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
+    *In the future we would like to add the ability for visitors to the site to become collaboraors and have the ability to add comments to the the files (even though they are not the owners of the files)
 
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email"
-  }
-}
-```
 
-#### POST /sign-in
 
-Request:
 
-```sh
-curl --include --request POST http://localhost:4741/sign-in \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password"
-    }
-  }'
-```
 
-```sh
-scripts/sign-in.sh
-```
 
-Response:
 
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
 
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email",
-    "token": "33ad6372f795694b333ec5f329ebeaaa"
-  }
-}
-```
 
-#### PATCH /change-password/
 
-Request:
-
-```sh
-curl --include --request PATCH http://localhost:4741/change-password/ \
-  --header "Authorization: Token token=$TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "an example password",
-      "new": "super sekrit"
-    }
-  }'
-```
-
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/change-password.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/
-
-Request:
-
-```sh
-curl --include --request DELETE http://localhost:4741/sign-out/ \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/sign-out.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-## [License](LICENSE)
-
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.

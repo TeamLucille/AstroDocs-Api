@@ -1,19 +1,18 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/examples"
+URL_PATH="/files"
 
-curl "${API}${URL_PATH}" \
+curl "${API}${URL_PATH}/${ID}" \
   --include \
-  --request POST \
+  --request DELETE \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "example": {
+    "file": {
       "title": "'"${TITLE}"'",
-      "tag": "'"${TAG}"'",
-      "owner":"'"${OWNER}"'",
-      "type": "'"${TITLE}"'"
+      "tags":"'"${TAGS}"'",
+      "type":"'"${TYPE}"'"
     }
   }'
 

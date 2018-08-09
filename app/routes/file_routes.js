@@ -61,7 +61,7 @@ router.get('/files/:id', requireToken, (req, res) => {
 router.post('/files', requireToken, (req, res) => {
   // set owner of new file to be current user
   req.body.file.owner = req.user.id
-
+console.log("GOT HERE",req.body)
   File.create(req.body.file)
     // respond to succesful `create` with status 201 and JSON of new "file"
     .then(file => {
