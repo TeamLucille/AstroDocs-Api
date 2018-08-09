@@ -27,6 +27,33 @@ const requireToken = passport.authenticate('bearer', { session: false })
 
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
+var multer  = require('multer')
+// var multerS3 = require('multer-s3')
+
+var aws = require('aws-sdk')
+var S3FS = require('s3fs')
+
+var s3 = new S3FS('astrodocs-bucket',{
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+})
+
+var fs = require('fs')
+
+
+//Uploads
+// var upload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: process.env.AWS_S3_BUCKET_NAME,
+//     metadata: function (req, file, cb) {
+//       cb(null, {fieldName: file.fieldname});
+//     },
+//     key: function (req, file, cb) {
+//       cb(null, Date.now().toString())
+//     }
+//   })
+// })
 
 // INDEX
 // GET /files
@@ -58,14 +85,24 @@ router.get('/files/:id', requireToken, (req, res) => {
 
 // CREATE
 // POST /files
-router.post('/files', requireToken, (req, res) => {
+router.post('/files', /*requireToken,*/ (req, res) => {
   // set owner of new file to be current user
-  req.body.file.owner = req.user.id
+  // req.body.file.owner = req.user.id
+  // var file = req.file
+  req.File
+  // var stream = fs.createReadStream(file.path)
+  return s3.writeFile(File).then(function(){
+    fs.unlink(File.path, function() {
+      if (err) {
+        console.error(err)
+      }
+    })
+  })
 
   File.create(req.body.file)
     // respond to succesful `create` with status 201 and JSON of new "file"
     .then(file => {
-      res.status(201).json({ file: file.toObject() })
+      res.status(201).json({ file: File })
     })
     // if an error occurs, pass it off to our error handler
     // the error handler needs the error message and the `res` object so that it
