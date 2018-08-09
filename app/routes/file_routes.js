@@ -3,6 +3,9 @@ const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
 
+// use multer to handle files sent in request
+const multer = require('multer')
+
 // pull in Mongoose model for files
 const File = require('../models/file')
 
@@ -27,6 +30,9 @@ const requireToken = passport.authenticate('bearer', { session: false })
 
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
+
+// instantiate a multer instance that saves files in 'uploads'
+const upload = multer({ dest: 'uploads/' })
 
 // INDEX
 // GET /files
@@ -58,11 +64,18 @@ router.get('/files/:id', requireToken, (req, res) => {
 
 // CREATE
 // POST /files
-router.post('/files', requireToken, (req, res) => {
+router.post('/files', requireToken, upload.single('file'), (req, res) => {
   // set owner of new file to be current user
-  req.body.file.owner = req.user.id
+  req.body.owner = req.user.id
+  const filePath = req.file.path
+  console.log(filePath)
+  s3upload(filePath)
+    .then(response => {
+      req.body.url = response.url
+      File.create(req.body)
+    })
 
-  File.create(req.body.file)
+  File.create(req.body)
     // respond to succesful `create` with status 201 and JSON of new "file"
     .then(file => {
       res.status(201).json({ file: file.toObject() })
