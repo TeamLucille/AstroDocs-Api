@@ -17,6 +17,11 @@ const fileSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true
+  },
+  // This comes from S3
+  url: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true
