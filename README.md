@@ -88,12 +88,16 @@ OTHER LINKS
 -----------------
 To see information about the front-end for AstroDocs, please click here: 
 
-[Imgur](https://i.imgur.com/A2Dqi7k.jpg)
+future erd:
+![alt text][futureERD](https://i.imgur.com/A2Dqi7k.jpg)
+
 
 This is the Link for our ERD: 
-[Imgur](https://i.imgur.com/mKZGyl5.jpg)
+-----------------------------
+erd: 
+![alt text][erd](https://i.imgur.com/mKZGyl5.jpg)
 
-![picture][erd]
+
 
 
 
