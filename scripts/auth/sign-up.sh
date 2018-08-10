@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 API="http://localhost:4741"
 URL_PATH="/sign-up"
 
@@ -17,3 +19,4 @@ curl "${API}${URL_PATH}" \
   }'
 
 echo
+
