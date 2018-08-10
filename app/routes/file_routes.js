@@ -4,7 +4,8 @@ const express = require('express')
 const passport = require('passport')
 
 // use multer to handle files sent in request
-const multer = require('multer')
+// const multer = require('multer')
+
 
 // pull in Mongoose model for files
 const File = require('../models/file')
@@ -32,7 +33,31 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // instantiate a multer instance that saves files in 'uploads'
-const upload = multer({ dest: 'uploads/' })
+// const upload = multer({ dest: 'uploads/' })
+
+var aws = require('aws-sdk')
+
+const path = require('path')
+const s3 = new aws.S3()
+const fs = require('fs');
+
+const s3Upload = file => {
+  const stream = fs.createReadStream(file);
+  var mime = require('mime')
+  const params = {
+    ACL: "public-read",
+    Bucket: process.env.AWS_S3_BUCKET_NAME,
+    Key: `${new Date().toISOString().split("T")[0]}-${path.basename(stream.path)}`,
+    Body: stream,
+    contentType: mime.getType(stream)
+  };
+
+  return new Promise((resolve, reject) => {
+    s3.upload(params, (err, data) => {
+      err ? reject(err) : resolve(data);
+    });
+  });
+};
 
 // INDEX
 // GET /files
@@ -64,26 +89,26 @@ router.get('/files/:id', requireToken, (req, res) => {
 
 // CREATE
 // POST /files
-router.post('/files', requireToken, upload.single('file'), (req, res) => {
+router.post('/files', requireToken, (req, res) => {
   // set owner of new file to be current user
-  req.body.owner = req.user.id
-  const filePath = req.file.path
-  console.log(filePath)
-  s3upload(filePath)
-    .then(response => {
-      req.body.url = response.url
-      File.create(req.body)
-    })
+  req.body.file.owner = req.user.id
+  const filePath = req.file
+  // console.log(typeofpath)
+  console.log(filePath) // req.file returns the json of the object
 
-  File.create(req.body)
-    // respond to succesful `create` with status 201 and JSON of new "file"
-    .then(file => {
-      res.status(201).json({ file: file.toObject() })
-    })
-    // if an error occurs, pass it off to our error handler
-    // the error handler needs the error message and the `res` object so that it
-    // can send an error message back to the client
-    .catch(err => handle(err, res))
+  s3Upload(req.body.file.url)
+    .then(response => {
+      req.body.file.url = response.Location
+      File.create(req.body.file)
+      // respond to succesful `create` with status 201 and JSON of new "file"
+      .then(file => {
+        res.status(201).json(file)
+      })
+      // if an error occurs, pass it off to our error handler
+      // the error handler needs the error message and the `res` object so that it
+      // can send an error message back to the client
+      .catch(err => handle(err, res))
+    }).catch(console.error)
 })
 
 // UPDATE
