@@ -1,17 +1,21 @@
-1) This is the read-me to the the back-end for our project, AstroDocs.  To see information about the front-end for AsroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
+WDI-PVD-03 GROUP PROJECT - ASTRODOCS -API
+=============================================
+
+ASTRODOCS
+==========
+
+OVERVIEW
+----------
+Build an app that allows users to upload files into a virtual file system. Ordinary users can only read/download a file where as Owners can do anything to the files they own. In addition to keeping track of the file structure, this app should associate meta-data with each file, including things like:
+
+    - Date created/uploaded
+    - Date modified
+    - Owner (user who uploaded the file)
+    - Tags
 
 
-This is the Link for our ERD: https://docs.google.com/document/d/1_BZWpVWBRwXZ81VKUb7lE4CrhsIMhu-OPn-EwUkJvVE/edit?usp=sharing.
-
-2) Technologies used: 
-    *Node
-    *Express
-    *MongoDB
-    *Mongoose
-
-3) User Stories:
-
- OWNERS:
+USER STORIES: OWNER
+--------------------
 
 - As a visitor to AstroDocs I need to know how to sign up so that I can become an Owner and sign in(using email, password, and password confirmation)
 
@@ -33,36 +37,61 @@ This is the Link for our ERD: https://docs.google.com/document/d/1_BZWpVWBRwXZ81
 - As an Owner I need to know how to add tags to my files so that I can find them later.
 
 - 
-VISITORS:
+USER STORIES: VISITORS
+----------------------
 
 - As a non-authorized visitor to AstroDocs I need to be able to browse recent/ all uploaded files so that I can view them.
 
 -  As a non-authorized visitor I need to be able to download files that are available so that I can download them to work on them/view them locally. 
 
+PROJECT REQUIREMENTS
+---------------------
+- Host on your public Github page, not Github  Enterprise.
+- Deploy client application on GH pages
+- Deploy server application on Heroku.
+- Making frequent, cohesive commits dating  back to the first day of the project week.
+- 1 commit on the first day of project week on both repos.
+- At least 1 commit every day during project week (not necessarily on both repos).
+- All repositories must have commits from every team member.
+- When pairing, include each developer's name in the commit message.
 
-GENERAL:
-The app should keep track of:
-    1)date created/uploaded
-    2)date modified
-    3)owner (user who uploaded the file)
-    4)tags
+TECH USED
+----------
 
-4) CHALLENGES:
-Initially our group decided to set up our data base 
-
-
-5) FUTURE DEVELOPMENTS:
-
-    *Currently owners can set up tags, but in the future we want set up the ability for visitors to search by tags.
+- EXPRESS
+- NODE
+- MONGODB
+- MONGOOSE
+- AWS- AMAZON
+- HEROKU
 
 
-    *Link to Future Developments ERD:
+CHALLENGES
+------------
+
+- Integrating Multer middleware
+- Uploading files
+
+FUTURE DEVELOPMENTS
+-------------------
+
+*Currently owners can set up tags, but in the future we want set up the ability for visitors to search by tags.
+
+*In the future we would like to add the ability for visitors to the site to become collaboraors and have the ability to add comments to the the files (even though they are not the owners of the files)
+
+*Link to Future Developments ERD:
     https://docs.google.com/document/d/1kB9eT2_IIBuNgMBuWt2Amfwz0ECSLyfELlENOnzs9l0/edit?usp=sharing
 
-    *In the future we would like to add the ability for visitors to the site to become collaboraors and have the ability to add comments to the the files (even though they are not the owners of the files)
 
 
+OTHER LINKS
+-----------------
+To see information about the front-end for AsroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
 
+This is the Link for our ERD: 
+[ERD]:https://i.imgur.com/mKZGyl5.jpg
+
+![picture][ERD]
 
 
 
