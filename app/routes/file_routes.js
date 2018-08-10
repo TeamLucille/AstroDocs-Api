@@ -4,7 +4,7 @@ const express = require('express')
 const passport = require('passport')
 
 // use multer to handle files sent in request
-// const multer = require('multer')
+const multer = require('multer')
 
 
 // pull in Mongoose model for files
@@ -33,7 +33,7 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // instantiate a multer instance that saves files in 'uploads'
-// const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: 'uploads/' })
 
 var aws = require('aws-sdk')
 
@@ -47,7 +47,7 @@ const s3Upload = file => {
   const params = {
     ACL: "public-read",
     Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Key: `${new Date().toISOString().split("T")[0]}-${path.basename(stream.path)}`,
+    Key: `"Kelechi " + ${new Date().toISOString().split("T")[0]}-${path.basename(stream.path)}`,
     Body: stream,
     contentType: mime.getType(stream)
   };
@@ -89,16 +89,24 @@ router.get('/files/:id', requireToken, (req, res) => {
 
 // CREATE
 // POST /files
-router.post('/files', requireToken, (req, res) => {
+router.post('/files', requireToken, upload.single('file'), (req, res) => {
   // set owner of new file to be current user
-  req.body.file.owner = req.user.id
-  const filePath = req.file
+  req.body.owner = req.user.id
+
+  const filePath = req.file.path
+
+  // console.log(req.file)
+  // console.log(req.body)
   // console.log(typeofpath)
   console.log(filePath) // req.file returns the json of the object
 
-  s3Upload(req.body.file.url)
+   var file = req.file.path
+
+  // console.log(file)
+
+  s3Upload(file)
     .then(response => {
-      req.body.file.url = response.Location
+      req.body.url = response.Location
       File.create(req.body.file)
       // respond to succesful `create` with status 201 and JSON of new "file"
       .then(file => {
