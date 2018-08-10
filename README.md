@@ -88,7 +88,10 @@ OTHER LINKS
 -----------------
 To see information about the front-end for AsroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
 
-This is the Link for our ERD: https://docs.google.com/document/d/1_BZWpVWBRwXZ81VKUb7lE4CrhsIMhu-OPn-EwUkJvVE/edit?usp=sharing.
+This is the Link for our ERD: 
+[ERD]:https://i.imgur.com/mKZGyl5.jpg
+
+![picture][ERD]
 
 
 
