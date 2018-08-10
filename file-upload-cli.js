@@ -1,6 +1,6 @@
 'use strict';
 
-var fileUpload = require('./lib/file-upload.js');
+var fileUpload = require('./lib/aws-s3-file-upload.js');
 
 var fs = require('fs');
 var File = require('./models/file.js');

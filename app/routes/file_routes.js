@@ -40,9 +40,6 @@ var aws = require('aws-sdk')
 //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 // })
 
-const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME
-const IAM_USER_KEY = process.env.AWS_ACCESS_KEY_ID
-const IAM_USER_SECRET = process.env.AWS_SECRET_ACCESS_KEY
 const path = require('path')
 const s3 = new aws.S3()
 
@@ -55,9 +52,7 @@ const s3Upload = file => {
   const params = {
     ACL: "public-read",
     Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Key: `${new Date().toISOString().split("T")[0]}-${path.basename(
-      stream.path
-    )}`,
+    Key: `${new Date().toISOString().split("T")[0]}-${path.basename(stream.path)}`,
     Body: stream,
     // contentType: fileType.mime
   };
@@ -148,8 +143,10 @@ router.post('/files', upload.single('file'),/*requireToken,*/ (req, res) => {
   var file = req.body.file.image
 
   s3Upload(file).then((data)=>{
-    req.body.file.image=data.Location
-    File.create(req.body.file)
+    req.body.file.title=data.Title
+    req.body.file=data 
+
+    File.create(req.body.file.image)
     // respond to succesful `create` with status 201 and JSON of new "file"
     .then(file => {
       res.status(201).json({ file: file })
@@ -160,6 +157,8 @@ router.post('/files', upload.single('file'),/*requireToken,*/ (req, res) => {
     .catch(err => handle(err, res))
   }).catch(console.error)
   // var stream = fs.createReadStream(file.path)
+  console.log(req.body.file.image)
+  console.log(req.body)
 })
 
 // UPDATE
