@@ -86,14 +86,15 @@ FUTURE DEVELOPMENTS
 
 OTHER LINKS
 -----------------
-To see information about the front-end for AstroDocs, please click here: 
+To see information about the front-end for AstroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
 
-future erd:
+FUTURE ERD:
 ![FUTUREERD](https://i.imgur.com/wGTA38v.jpg)
 
 
 This is the Link for our ERD: 
 -----------------------------
+ERD:
 ![ERD](https://i.imgur.com/OCnxMPr.jpg)
 
 
