@@ -94,7 +94,7 @@ future erd:
 
 This is the Link for our ERD: 
 -----------------------------
-![ERD]:(https://i.imgur.com/OCnxMPr.jpg)
+![ERD](https://i.imgur.com/OCnxMPr.jpg)
 
 
 
