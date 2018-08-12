@@ -80,7 +80,10 @@ FUTURE DEVELOPMENTS
 - In the future we would like to add the ability for visitors to the site to become collaboraors and have the ability to add comments to the the files (even though they are not the owners of the files)
 
 - Link to Future Developments ERD:
-    https://docs.google.com/document/d/1kB9eT2_IIBuNgMBuWt2Amfwz0ECSLyfELlENOnzs9l0/edit?usp=sharing
+
+FUTURE ERD:
+
+![FUTUREERD](https://i.imgur.com/wGTA38v.jpg)
 
 
 
@@ -88,9 +91,6 @@ OTHER LINKS
 -----------------
 To see information about the front-end for AstroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
 
-FUTURE ERD:
-
-![FUTUREERD](https://i.imgur.com/wGTA38v.jpg)
 
 
 This is the Link for our ERD: 
