@@ -18,8 +18,10 @@ const fileSchema = new mongoose.Schema({
     type: String,
     required: false
   }
-}, {
-  timestamps: true
-})
+}
 
+// {
+//   timestamps: true
+// }
+)
 module.exports = mongoose.model('File', fileSchema)

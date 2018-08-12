@@ -9,10 +9,11 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "file": {
-      "name": "'"${NAME}"'",
-      "title": "'"${TITLE}"'"
-      "type": "'"${TITLE}"'"
+    "example": {
+      "title": "'"${TITLE}"'",
+      "tag": "'"${TAG}"'",
+      "owner":"'"${OWNER}"'",
+
     }
   }'
 

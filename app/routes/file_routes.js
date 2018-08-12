@@ -91,6 +91,7 @@ router.get('/files/:id', requireToken, (req, res) => {
 // POST /files
 router.post('/files', requireToken, upload.single('file'), (req, res) => {
   // set owner of new file to be current user
+
   req.body.owner = req.user.id
 
   const filePath = req.file.path

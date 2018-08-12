@@ -11,7 +11,8 @@ curl "${API}${URL_PATH}" \
   --data '{
     "file": {
       "title": "'"${TITLE}"'",
-      "tag":"'"${TAG}"'",
+      "tags":"'"${TAGS}"'",
+      "owner":"'"${OWNER}"'",
       "type":"'"${TYPE}"'"
     }
   }'
