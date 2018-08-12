@@ -17,7 +17,7 @@ Build an app that allows users to upload files into a virtual file system. Ordin
 USER STORIES: OWNER
 --------------------
 
-- As a visitor to AstroDocs I need to know how to sign up so that I can become an Owner and sign in (using email, password, and password confirmation)
+- As a Visitor to AstroDocs I need to know how to sign up so that I can become an Owner and sign in (using email, password, and password confirmation)
 
 - As an Owner I need to be able to log in with email and password so that only I will have the ability to create, update, and delete files.  
 
@@ -89,12 +89,14 @@ OTHER LINKS
 To see information about the front-end for AstroDocs, please click here: https://github.com/TeamLucille/AstroDocs-Client
 
 FUTURE ERD:
+
 ![FUTUREERD](https://i.imgur.com/wGTA38v.jpg)
 
 
 This is the Link for our ERD: 
 -----------------------------
 ERD:
+
 ![ERD](https://i.imgur.com/OCnxMPr.jpg)
 
 
