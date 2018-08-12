@@ -13,7 +13,7 @@ curl "${API}${URL_PATH}" \
       "title": "'"${TITLE}"'",
       "tag": "'"${TAG}"'",
       "owner":"'"${OWNER}"'",
-      "type": "'"${TITLE}"'"
+
     }
   }'
 

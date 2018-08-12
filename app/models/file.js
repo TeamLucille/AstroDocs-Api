@@ -5,7 +5,7 @@ const fileSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  tags: {
+  contentType: {
     type: String,
     required: true
   },
@@ -14,9 +14,9 @@ const fileSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  type: {
+  url: {
     type: String,
-    required: true
+    required: false
   }
 }
 
