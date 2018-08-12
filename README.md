@@ -89,7 +89,7 @@ OTHER LINKS
 To see information about the front-end for AstroDocs, please click here: 
 
 future erd:
-![alt text][futureERD](https://i.imgur.com/A2Dqi7k.jpg)
+![FUTUREERD](https://i.imgur.com/wGTA38v.jpg)
 
 
 This is the Link for our ERD: 
