@@ -17,7 +17,7 @@ Build an app that allows users to upload files into a virtual file system. Ordin
 USER STORIES: OWNER
 --------------------
 
-- As a Visitor to AstroDocs I need to know how to sign up so that I can become an Owner and sign in (using email, password, and password confirmation)
+- As a Visitor to AstroDocs I need to know how to sign up so that I can become an Owner and sign in (using email, password, and password confirmation).
 
 - As an Owner I need to be able to log in with email and password so that only I will have the ability to create, update, and delete files.  
 
@@ -47,7 +47,7 @@ USER STORIES: VISITOR
 PROJECT REQUIREMENTS
 ---------------------
 - Host on your public Github page, not Github  Enterprise.
-- Deploy client application on GH pages
+- Deploy client application on GitHub Pages.
 - Deploy server application on Heroku.
 - Making frequent, cohesive commits dating  back to the first day of the project week.
 - 1 commit on the first day of project week on both repos.
@@ -77,7 +77,7 @@ FUTURE DEVELOPMENTS
 
 - Currently Owners can set up tags, but in the future we want set up the ability for Visitors to search by tags.
 
-- In the future we would like to add the ability for visitors to the site to become collaboraors and have the ability to add comments to the the files (even though they are not the owners of the files)
+- In the future we would like to add the ability for visitors to the site to become collaboraors and have the ability to add comments to the the files (even though they are not the owners of the files).
 
 - Link to Future Developments ERD:
 
